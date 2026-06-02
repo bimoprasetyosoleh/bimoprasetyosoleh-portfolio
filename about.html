@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | Bimo Prasetyo</title>
+
+    <link rel="icon" type="image/png" href="src/assets/logo/White.png" />
+    <link rel="apple-touch-icon" href="src/assets/logo/White.png" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FIX LUCIDE: Ikon bundle lengkap -->
+    <script src="https://unpkg.com/lucide@0.400.0/dist/umd/lucide.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #0f0f0f;
+        --card: #171717;
+        --primary: #3b82f6;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        color: white;
+        margin: 0;
+        overflow: hidden; /* Dikunci saat loading */
+      }
+
+      /* --- PRELOADER STYLES --- */
+      #preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background-color: var(--bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+          visibility 0.8s;
+      }
+      .loader-logo {
+        width: 80px;
+        height: 80px;
+        background: var(--card);
+        border: 4px solid rgba(246, 246, 246, 0.295);
+        border-radius: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 24px;
+      }
+      .loader-logo span {
+        font-size: 32px;
+        font-weight: 900;
+        color: var(--primary);
+        letter-spacing: -2px;
+      }
+      .loader-bar-container {
+        width: 120px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+      }
+      #loader-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0%;
+        background: var(--primary);
+        transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+      }
+
+      /* --- BENTO STYLES --- */
+      .bento-card {
+        background: var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 24px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .bento-card:hover {
+        border-color: var(--primary);
+        transform: translateY(-5px);
+        background: #1c1c1c;
+      }
+
+      .glass-nav {
+        background: rgba(23, 23, 23, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        width: 90%;
+        max-width: 450px;
+      }
+      .nav-link {
+        color: #a1a1aa;
+        transition: 0.3s;
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 12px;
+      }
+      @media (min-width: 640px) {
+        .nav-link {
+          font-size: 14px;
+          padding: 8px 16px;
+        }
+      }
+      .nav-link.active {
+        color: white;
+        background: var(--primary);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-in {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body class="p-4 md:p-10 lg:p-16">
+    <!-- PRELOADER -->
+    <div id="preloader">
+      <div class="loader-logo">
+        <img
+          src="src/assets/logo/Black.png"
+          alt="Logo"
+          class="w-full h-full object-contain"
+        />
+        <div
+          class="absolute inset-0 rounded-[60px] bg-blue-500/10 animate-ping"
+        ></div>
+      </div>
+      <div class="loader-bar-container">
+        <div id="loader-progress"></div>
+      </div>
+      <p
+        class="mt-4 text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500 animate-pulse"
+      >
+        Loading Identity
+      </p>
+    </div>
+
+    <!-- NAVIGASI RESPONSIF -->
+    <nav
+      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 glass-nav p-2 rounded-2xl flex justify-around md:justify-center md:gap-2 shadow-2xl"
+    >
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="experience.html" class="nav-link">Exp</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <main class="max-w-7xl mx-auto mb-32">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
+        <!-- 1. ABOUT ME CARD -->
+        <div
+          class="md:col-span-2 lg:col-span-7 bento-card p-8 lg:p-12 animate-in"
+          style="animation-delay: 0.1s"
+        >
+          <span
+            class="text-blue-500 text-[10px] font-black uppercase tracking-[0.3em] mb-4 block text-center md:text-left"
+            >The Person</span
+          >
+          <h2
+            class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tighter mb-6 text-center md:text-left"
+          >
+            About Me!
+          </h2>
+          <div
+            class="space-y-4 text-zinc-400 text-base lg:text-lg leading-relaxed font-medium"
+          >
+            <p>
+              Halo! Saya Bimo, seorang pengembang yang percaya bahwa teknologi
+              harus memudahkan hidup, bukan memperumitnya.
+            </p>
+            <p>
+              Saya fokus pada pembangunan produk digital yang tidak hanya
+              berfungsi secara teknis, tetapi juga memberikan pengalaman
+              pengguna yang mulus dan visual yang modern.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2. VISION CARD -->
+        <div
+          class="md:col-span-2 lg:col-span-5 bento-card p-8 bg-blue-600 border-none justify-center animate-in"
+          style="animation-delay: 0.2s"
+        >
+          <i
+            data-lucide="eye"
+            class="w-10 h-10 mb-6 opacity-50 mx-auto md:mx-0"
+          ></i>
+          <h3
+            class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-2 text-blue-200 text-center md:text-left"
+          >
+            Our Vision
+          </h3>
+          <p
+            class="text-xl md:text-2xl lg:text-3xl font-bold leading-tight italic text-center md:text-left text-white"
+          >
+            "Helping businesses go digital through modern technology."
+          </p>
+        </div>
+
+        <!-- 3. JOURNEY TIMELINE CARD -->
+        <div
+          class="md:col-span-2 lg:col-span-8 bento-card p-8 animate-in"
+          style="animation-delay: 0.3s"
+        >
+          <span
+            class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-8 block"
+            >Journey Timeline</span
+          >
+          <div class="space-y-8">
+            <div class="flex gap-4 lg:gap-6 items-start">
+              <div class="text-blue-500 font-black text-xl min-w-[50px]">
+                2026
+              </div>
+              <div>
+                <h4
+                  class="font-bold text-white uppercase text-xs lg:text-sm tracking-widest"
+                >
+                  Growth Phase
+                </h4>
+                <p class="text-zinc-500 text-sm">
+                  Fokus utama pada pengembangan digital.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex gap-4 lg:gap-6 items-start border-t border-zinc-800 pt-6"
+            >
+              <div class="text-zinc-600 font-black text-xl min-w-[50px]">
+                2025
+              </div>
+              <div>
+                <h4
+                  class="font-bold text-white uppercase text-xs lg:text-sm tracking-widest"
+                >
+                  Intern - Digital Marketing
+                </h4>
+                <p class="text-zinc-500 text-sm">
+                  Mendukung perencanaan dan implementasi kampanye digital
+                  marketing malalui berbagai kanal.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex gap-4 lg:gap-6 items-start border-t border-zinc-800 pt-6"
+            >
+              <div class="text-zinc-600 font-black text-xl min-w-[50px]">
+                2024
+              </div>
+              <div>
+                <h4
+                  class="font-bold text-white uppercase text-xs lg:text-sm tracking-widest"
+                >
+                  Intern - Sosial media specialist
+                </h4>
+                <p class="text-zinc-500 text-sm">
+                  Merancang menggunakan CMS (Wordpress), Mengembangkan dan
+                  melaksanakan strategi digital.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex gap-4 lg:gap-6 items-start border-t border-zinc-800 pt-6"
+            >
+              <div class="text-zinc-600 font-black text-xl min-w-[50px]">
+                2023
+              </div>
+              <div>
+                <h4
+                  class="font-bold text-white uppercase text-xs lg:text-sm tracking-widest"
+                >
+                  Pertukaran Mahasiswa
+                </h4>
+                <p class="text-zinc-500 text-sm">
+                  Mengeksplorasi dan memahami wisata serta peniggalan sejarah di
+                  berbagai lokasi di Jawa Tengah.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. SKILLS CARD -->
+        <div
+          class="md:col-span-2 lg:col-span-4 bento-card p-8 justify-between animate-in"
+          style="animation-delay: 0.4s"
+        >
+          <span
+            class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-6 block"
+            >Skills</span
+          >
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-sm lg:text-base text-zinc-300"
+                >CMS (WordPress)</span
+              ><i
+                data-lucide="check-circle-2"
+                class="text-blue-500 w-4 h-4"
+              ></i>
+            </div>
+            <div
+              class="flex justify-between items-center border-t border-zinc-800 pt-3"
+            >
+              <span class="font-bold text-sm lg:text-base text-zinc-300"
+                >Frontend</span
+              ><i
+                data-lucide="check-circle-2"
+                class="text-blue-500 w-4 h-4"
+              ></i>
+            </div>
+            <div
+              class="flex justify-between items-center border-t border-zinc-800 pt-3"
+            >
+              <span class="font-bold text-sm lg:text-base text-zinc-300"
+                >Backend</span
+              ><i
+                data-lucide="check-circle-2"
+                class="text-blue-500 w-4 h-4"
+              ></i>
+            </div>
+            <div
+              class="flex justify-between items-center border-t border-zinc-800 pt-3"
+            >
+              <span class="font-bold text-sm lg:text-base text-zinc-300"
+                >Graphics Design</span
+              ><i
+                data-lucide="check-circle-2"
+                class="text-blue-500 w-4 h-4"
+              ></i>
+            </div>
+            <div
+              class="flex justify-between items-center border-t border-zinc-800 pt-3"
+            >
+              <span class="font-bold text-sm lg:text-base text-zinc-300"
+                >UI Design</span
+              ><i
+                data-lucide="check-circle-2"
+                class="text-blue-500 w-4 h-4"
+              ></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. CURRENT LEARNING -->
+        <div
+          class="md:col-span-2 lg:col-span-6 bento-card p-8 animate-in"
+          style="animation-delay: 0.5s"
+        >
+          <span
+            class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-6 block"
+            >Current Learning</span
+          >
+          <div class="flex flex-wrap gap-2 lg:gap-3">
+            <div
+              class="flex items-center gap-2 bg-zinc-900 px-3 py-2 rounded-xl border border-zinc-800"
+            >
+              <i data-lucide="code-2" class="w-4 h-4 text-orange-500"></i
+              ><span class="text-xs lg:text-sm font-bold">Laravel</span>
+            </div>
+            <div
+              class="flex items-center gap-2 bg-zinc-900 px-3 py-2 rounded-xl border border-zinc-800"
+            >
+              <i data-lucide="smartphone" class="w-4 h-4 text-cyan-400"></i
+              ><span class="text-xs lg:text-sm font-bold">PWA</span>
+            </div>
+            <div
+              class="flex items-center gap-2 bg-zinc-900 px-3 py-2 rounded-xl border border-zinc-800"
+            >
+              <i data-lucide="layers" class="w-4 h-4 text-purple-500"></i
+              ><span class="text-xs lg:text-sm font-bold">System Design</span>
+            </div>
+            <div
+              class="flex items-center gap-2 bg-zinc-900 px-3 py-2 rounded-xl border border-zinc-800"
+            >
+              <i data-lucide="sparkles" class="w-4 h-4 text-yellow-500"></i
+              ><span class="text-xs lg:text-sm font-bold">AI Integration</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. INTERESTS -->
+        <div
+          class="md:col-span-2 lg:col-span-6 bento-card p-8 animate-in"
+          style="animation-delay: 0.6s"
+        >
+          <span
+            class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-6 block"
+            >Interests</span
+          >
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+            <div class="p-3 bg-zinc-900/50 rounded-2xl">
+              <p class="text-[9px] font-bold text-zinc-500 uppercase mb-1">
+                Coding
+              </p>
+              <i
+                data-lucide="terminal"
+                class="w-5 h-5 mx-auto text-blue-500"
+              ></i>
+            </div>
+            <div class="p-3 bg-zinc-900/50 rounded-2xl">
+              <p class="text-[9px] font-bold text-zinc-500 uppercase mb-1">
+                Design
+              </p>
+              <i
+                data-lucide="palette"
+                class="w-5 h-5 mx-auto text-pink-500"
+              ></i>
+            </div>
+            <div class="p-3 bg-zinc-900/50 rounded-2xl">
+              <p class="text-[9px] font-bold text-zinc-500 uppercase mb-1">
+                Tech
+              </p>
+              <i data-lucide="cpu" class="w-5 h-5 mx-auto text-cyan-500"></i>
+            </div>
+            <div class="p-3 bg-zinc-900/50 rounded-2xl">
+              <p class="text-[9px] font-bold text-zinc-500 uppercase mb-1">
+                Startup
+              </p>
+              <i
+                data-lucide="trending-up"
+                class="w-5 h-5 mx-auto text-green-500"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // 1. Inisialisasi Ikon
+        if (typeof lucide !== "undefined") lucide.createIcons();
+
+        // 2. Logika Preloader
+        const preloader = document.getElementById("preloader");
+        const progress = document.getElementById("loader-progress");
+
+        setTimeout(() => {
+          progress.style.width = "100%";
+        }, 100);
+
+        window.addEventListener("load", () => {
+          setTimeout(() => {
+            preloader.style.opacity = "0";
+            preloader.style.visibility = "hidden";
+            document.body.style.overflow = "auto";
+            document.body.style.overflowX = "hidden";
+          }, 1000);
+        });
+      });
+    </script>
+  </body>
+</html>

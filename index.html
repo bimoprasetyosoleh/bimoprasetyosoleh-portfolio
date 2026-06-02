@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bimo Prasetyo | Web Developer & digital marketer</title>
+
+    <link rel="icon" type="image/png" href="src/assets/logo/White.png" />
+    <link rel="apple-touch-icon" href="src/assets/logo/White.png" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FIX LUCIDE: Ikon bundle lengkap -->
+    <script src="https://unpkg.com/lucide@0.400.0/dist/umd/lucide.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --bg: #0f0f0f;
+        --card: #171717;
+        --primary: #3b82f6;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        color: white;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Dikunci saat loading, dibuka oleh JS */
+      }
+
+      /* --- PRELOADER STYLES --- */
+      #preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background-color: var(--bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+          visibility 0.8s;
+      }
+
+      .loader-logo {
+        width: 100px;
+        height: 100px;
+        background: var(--card);
+        border: 4px solid rgba(246, 246, 246, 0.295);
+        border-radius: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 24px;
+        box-shadow: 0 20px 40px rgba(60, 59, 59, 0.5);
+      }
+
+      .loader-logo span {
+        font-size: 32px;
+        font-weight: 900;
+        color: var(--primary);
+        letter-spacing: -2px;
+      }
+
+      .loader-bar-container {
+        width: 120px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      #loader-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0%;
+        background: var(--primary);
+        transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+      }
+
+      /* --- BENTO STYLES --- */
+      .bento-card {
+        background: var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 24px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .bento-card:hover {
+        border-color: var(--primary);
+        transform: translateY(-5px);
+        background: #1c1c1c;
+        box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.2);
+      }
+
+      .glass-nav {
+        background: rgba(23, 23, 23, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        width: 90%;
+        max-width: 450px;
+      }
+      .nav-link {
+        color: #a1a1aa;
+        transition: 0.3s;
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 12px;
+      }
+      @media (min-width: 640px) {
+        .nav-link {
+          font-size: 14px;
+          padding: 8px 16px;
+        }
+      }
+      .nav-link:hover {
+        color: white;
+      }
+      .nav-link.active {
+        color: white;
+        background: var(--primary);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-in {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body class="p-4 md:p-8 lg:p-16">
+    <!-- PRELOADER START -->
+    <div id="preloader">
+      <div class="loader-logo">
+        <img
+          src="src/assets/logo/Black.png"
+          alt="Logo"
+          class="w-full h-full object-contain"
+        />
+        <!-- Efek Pulse -->
+        <div
+          class="absolute inset-0 rounded-[60px] bg-blue-500/10 animate-ping"
+        ></div>
+      </div>
+      <div class="loader-bar-container">
+        <div id="loader-progress"></div>
+      </div>
+      <p
+        class="mt-4 text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500 animate-pulse"
+      >
+        Initializing System
+      </p>
+    </div>
+    <!-- PRELOADER END -->
+
+    <!-- NAVIGASI -->
+    <nav
+      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 glass-nav p-2 rounded-2xl flex justify-around md:justify-center md:gap-2 shadow-2xl"
+    >
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="experience.html" class="nav-link">Exp</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <main class="max-w-7xl mx-auto mb-32">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
+        <!-- 1. HERO CARD -->
+        <div
+          class="md:col-span-2 lg:col-span-8 bento-card p-8 lg:p-12 min-h-[350px] justify-between animate-in"
+          style="animation-delay: 0.1s"
+        >
+          <div class="space-y-6">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"
+              ></span>
+              <span
+                class="text-[10px] font-black text-blue-500 uppercase tracking-widest"
+                >Available for projects</span
+              >
+            </div>
+            <h1
+              class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter leading-tight"
+            >
+              Hey, I'm Bimo 👋
+            </h1>
+            <div class="space-y-3">
+              <h2 class="text-xl md:text-2xl font-semibold text-zinc-300">
+                Web Developer &
+                <span class="text-blue-500">Digital Product Builder</span>
+              </h2>
+              <p
+                class="text-zinc-400 text-base md:text-lg max-w-lg leading-relaxed"
+              >
+                Building websites, dashboards, business systems, and modern
+                digital experiences.
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4 mt-8">
+            <a
+              href="src/assets/docs/CV Bimo Prasetyo S.pdf"
+              target="_blank"
+              class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg shadow-blue-500/20"
+            >
+              Download CV
+            </a>
+            <a
+              href="contact.html"
+              class="w-full sm:w-auto text-center bg-zinc-800 hover:bg-zinc-700 text-white px-8 py-4 rounded-full font-bold border border-zinc-700 transition-all"
+            >
+              let's talk
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. AVATAR CARD -->
+        <div
+          class="md:col-span-1 lg:col-span-4 bento-card overflow-hidden flex items-end justify-center"
+        >
+          <img
+            src="src/assets/images/avatar01.png"
+            alt="Avatar"
+            class="h-full object-contain scale-110"
+          />
+        </div>
+
+        <!-- 3. CONNECT CARD -->
+        <div
+          class="md:col-span-1 lg:col-span-3 bento-card p-6 min-h-[250px] animate-in"
+          style="animation-delay: 0.3s"
+        >
+          <span
+            class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest block mb-4"
+            >Connect</span
+          >
+          <div class="flex-grow flex flex-col justify-center">
+            <div class="grid grid-cols-2 gap-3">
+              <a
+                href="https://github.com/bimoprasetyosoleh"
+                class="bg-zinc-900 aspect-square rounded-2xl flex items-center justify-center hover:bg-gray-600 transition group border border-zinc-800/50"
+              >
+                <i
+                  data-lucide="github"
+                  class="w-6 h-6 text-zinc-400 group-hover:text-white transition"
+                ></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/bimo-prasetyo-soleh-600579269/"
+                class="bg-zinc-900 aspect-square rounded-2xl flex items-center justify-center hover:bg-blue-700 transition group border border-zinc-800/50"
+              >
+                <i
+                  class="fab fa-linkedin text-2xl text-zinc-400 group-hover:text-white transition"
+                ></i>
+              </a>
+              <a
+                href="https://www.instagram.com/anaknyabapaksoleh/"
+                class="bg-zinc-900 aspect-square rounded-2xl flex items-center justify-center hover:bg-pink-600 transition group border border-zinc-800/50"
+              >
+                <i
+                  data-lucide="instagram"
+                  class="w-6 h-6 text-zinc-400 group-hover:text-white transition"
+                ></i>
+              </a>
+              <a
+                href="https://wa.me/6285119560335"
+                class="bg-zinc-900 aspect-square rounded-2xl flex items-center justify-center hover:bg-green-600 transition group border border-zinc-800/50"
+              >
+                <i
+                  class="fab fa-whatsapp text-2xl text-zinc-400 group-hover:text-white transition"
+                ></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. TECH STACK CARD -->
+        <div
+          class="md:col-span-2 lg:col-span-6 bento-card p-6 lg:p-8 animate-in flex flex-col justify-between"
+          style="animation-delay: 0.4s"
+        >
+          <div class="flex justify-between items-center mb-6">
+            <span
+              class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em]"
+              >Proficiency</span
+            >
+            <i data-lucide="code-2" class="w-4 h-4 text-zinc-500"></i>
+          </div>
+          <div class="space-y-5 flex-grow flex flex-col justify-center">
+            <div class="group">
+              <div class="flex justify-between mb-2 items-end">
+                <span class="text-sm font-bold tracking-tight">Wordpress</span>
+                <span class="text-xs font-black text-zinc-500">95%</span>
+              </div>
+              <div
+                class="w-full bg-zinc-900 h-1.5 rounded-full overflow-hidden border border-zinc-800/50"
+              >
+                <div
+                  class="bg-blue-600 h-full rounded-full"
+                  style="width: 95%"
+                ></div>
+              </div>
+            </div>
+            <div class="group">
+              <div class="flex justify-between mb-2 items-end">
+                <span class="text-sm font-bold tracking-tight">Laravel</span>
+                <span class="text-xs font-black text-zinc-500">85%</span>
+              </div>
+              <div
+                class="w-full bg-zinc-900 h-1.5 rounded-full overflow-hidden border border-zinc-800/50"
+              >
+                <div
+                  class="bg-blue-600 h-full rounded-full"
+                  style="width: 85%"
+                ></div>
+              </div>
+            </div>
+            <div class="group">
+              <div class="flex justify-between mb-2 items-end">
+                <span class="text-sm font-bold tracking-tight"
+                  >Tailwind CSS</span
+                >
+                <span class="text-xs font-black text-zinc-500">88%</span>
+              </div>
+              <div
+                class="w-full bg-zinc-900 h-1.5 rounded-full overflow-hidden border border-zinc-800/50"
+              >
+                <div
+                  class="bg-blue-600 h-full rounded-full"
+                  style="width: 88%"
+                ></div>
+              </div>
+            </div>
+            <div class="group">
+              <div class="flex justify-between mb-2 items-end">
+                <span class="text-sm font-bold tracking-tight">JavaScript</span>
+                <span class="text-xs font-black text-zinc-500">88%</span>
+              </div>
+              <div
+                class="w-full bg-zinc-900 h-1.5 rounded-full overflow-hidden border border-zinc-800/50"
+              >
+                <div
+                  class="bg-blue-600 h-full rounded-full"
+                  style="width: 88%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. STATISTICS CARD -->
+        <div
+          class="md:col-span-2 lg:col-span-3 bento-card p-8 justify-between animate-in"
+          style="animation-delay: 0.5s"
+        >
+          <span
+            class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest block mb-4"
+            >Stats</span
+          >
+          <div class="flex-grow flex flex-col justify-around py-2">
+            <div class="flex items-center lg:block gap-4 lg:gap-0">
+              <h3 class="text-4xl font-black tracking-tighter">10+</h3>
+              <p
+                class="text-[10px] text-zinc-500 uppercase font-black tracking-widest"
+              >
+                Projects
+              </p>
+            </div>
+            <div
+              class="border-t border-zinc-800/50 pt-4 flex items-center lg:block gap-4 lg:gap-0"
+            >
+              <h3 class="text-4xl font-black tracking-tighter">3</h3>
+              <p
+                class="text-[10px] text-zinc-500 uppercase font-black tracking-widest"
+              >
+                Systems
+              </p>
+            </div>
+            <div
+              class="border-t border-zinc-800/50 pt-4 flex items-center lg:block gap-4 lg:gap-0"
+            >
+              <h3 class="text-4xl font-black text-blue-500 tracking-tighter">
+                2
+              </h3>
+              <p
+                class="text-[10px] text-zinc-500 uppercase font-black tracking-widest"
+              >
+                PWA Apps
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. FEATURED PROJECT -->
+        <div
+          class="md:col-span-2 lg:col-span-7 bento-card p-6 lg:p-8 group animate-in overflow-hidden flex flex-col justify-between"
+          style="animation-delay: 0.6s"
+        >
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <span
+                class="text-blue-500 text-[10px] font-black rounded uppercase tracking-widest"
+                >Featured Case Study</span
+              >
+              <h3
+                class="text-3xl lg:text-4xl font-black tracking-tighter group-hover:text-blue-500 transition-colors"
+              >
+                System Monitoring Chicken Farm
+              </h3>
+            </div>
+            <div
+              class="hidden md:flex w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 items-center justify-center group-hover:bg-blue-600 transition-all"
+            >
+              <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div
+            class="relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 shadow-2xl"
+          >
+            <div
+              class="bg-zinc-900/50 px-4 py-2 border-b border-zinc-800 flex gap-1.5 items-center"
+            >
+              <div class="w-2 h-2 rounded-full bg-red-500/40"></div>
+              <div class="w-2 h-2 rounded-full bg-yellow-500/40"></div>
+              <div class="w-2 h-2 rounded-full bg-green-500/40"></div>
+            </div>
+            <a href="src/assets/video/Sistem Fram.mp4" target="_top" rel="noopener noreferrer">
+              <img
+                src="src/assets/projects/system_monitoring.png"
+                alt="System Monitoring Chicken Farm"
+                class="w-full h-48 md:h-64 object-cover object-top group-hover:scale-105 transition-transform duration-700"
+              />
+            </a>
+          </div>
+        </div>
+
+        <!-- 7. COLLABORATION CARD -->
+        <div
+          class="md:col-span-2 lg:col-span-5 bento-card p-8 bg-blue-600 border-none animate-in flex flex-col justify-between"
+          style="animation-delay: 0.7s"
+        >
+          <div class="space-y-4">
+            <i data-lucide="zap" class="w-10 h-10 fill-white"></i>
+            <h3
+              class="text-3xl lg:text-4xl font-extrabold leading-tight text-white tracking-tighter"
+            >
+              Let's Build Something Amazing
+            </h3>
+          </div>
+          <a href="projects.html" target="_top" rel="noopener noreferrer">
+            <button
+              class="mt-8 w-full bg-white text-blue-600 py-4 rounded-xl font-black text-lg hover:scale-[1.02] active:scale-95 transition-all"
+            >
+              Start a Project
+            </button>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // 1. Inisialisasi Ikon
+        if (typeof lucide !== "undefined") lucide.createIcons();
+
+        // 2. Logika Preloader
+        const preloader = document.getElementById("preloader");
+        const progress = document.getElementById("loader-progress");
+
+        // Jalankan progress bar
+        setTimeout(() => {
+          progress.style.width = "100%";
+        }, 100);
+
+        // Hilangkan preloader setelah halaman fully loaded
+        window.addEventListener("load", () => {
+          setTimeout(() => {
+            preloader.style.opacity = "0";
+            preloader.style.visibility = "hidden";
+            // Enable scroll kembali
+            document.body.style.overflow = "auto";
+            document.body.style.overflowX = "hidden";
+          }, 1000); // Jeda agar user bisa melihat animasi
+        });
+      });
+    </script>
+  </body>
+</html>

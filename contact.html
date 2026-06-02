@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Bimo Prasetyo</title>
+
+    <link rel="icon" type="image/png" href="src/assets/logo/White.png" />
+    <link rel="apple-touch-icon" href="src/assets/logo/White.png" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FIX LUCIDE: Bundle UMD lengkap -->
+    <script src="https://unpkg.com/lucide@0.400.0/dist/umd/lucide.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #0F0F0F;
+            --card: #171717;
+            --primary: #3B82F6;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: white; 
+            margin: 0;
+            overflow: hidden; /* Dikunci saat loading */
+        }
+
+        /* --- PRELOADER STYLES --- */
+        #preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background-color: var(--bg);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 0.8s cubic-bezier(0.65, 0, 0.35, 1), visibility 0.8s;
+        }
+        .loader-logo {
+            width: 80px; height: 80px; background: var(--card);
+            border: 4px solid rgba(246, 246, 246, 0.295); border-radius: 60px;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; margin-bottom: 24px;
+        }
+        .loader-logo span { font-size: 32px; font-weight: 900; color: var(--primary); letter-spacing: -2px; }
+        .loader-bar-container { width: 120px; height: 2px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; position: relative; }
+        #loader-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: var(--primary); transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1); }
+
+        /* --- BENTO STYLES --- */
+        .bento-card { 
+            background: var(--card); 
+            border: 1px solid rgba(255,255,255,0.05); 
+            border-radius: 24px; 
+            transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .bento-card:hover { border-color: var(--primary); background: #1c1c1c; }
+
+        /* Input Premium Styles */
+        input, textarea, select {
+            background: #0F0F0F !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
+            color: white !important;
+            border-radius: 12px !important;
+            padding: 12px 16px !important;
+            width: 100%; outline: none; transition: 0.3s;
+            font-size: 14px;
+        }
+        input:focus, textarea:focus, select:focus { 
+            border-color: var(--primary) !important; 
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); 
+        }
+
+        .glass-nav { 
+            background: rgba(23, 23, 23, 0.8); backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            width: 90%; max-width: 450px;
+        }
+        .nav-link { color: #A1A1AA; transition: 0.3s; padding: 6px 12px; border-radius: 12px; font-weight: 600; font-size: 12px; }
+        @media (min-width: 640px) { .nav-link { font-size: 14px; padding: 8px 16px; } }
+        .nav-link.active { color: white; background: var(--primary); }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeInUp 0.6s ease forwards; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+    </style>
+</head>
+<body class="p-4 md:p-10 lg:p-16">
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="loader-logo">
+            <img src="src/assets/logo/Black.png" alt="Logo" class="w-full h-full object-contain">
+            <div class="absolute inset-0 rounded-[60px] bg-blue-500/10 animate-ping"></div>
+        </div>
+        <div class="loader-bar-container">
+            <div id="loader-progress"></div>
+        </div>
+        <p class="mt-4 text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500 animate-pulse">Establishing Connection</p>
+    </div>
+
+    <!-- NAVIGASI RESPONSIF -->
+    <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 glass-nav p-2 rounded-2xl flex justify-around md:justify-center md:gap-2 shadow-2xl">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="experience.html" class="nav-link">Exp</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+
+    <main class="max-w-7xl mx-auto mb-32">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+            
+            <!-- 1. MAIN CTA CARD -->
+            <div class="md:col-span-2 lg:col-span-8 bento-card p-8 lg:p-12 min-h-[250px] justify-center animate-in" style="animation-delay: 0.1s;">
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-tight mb-6 text-center md:text-left">
+                    Have a project in mind? <br>
+                    <span class="text-blue-500 underline decoration-blue-500/20">Let's build it together.</span>
+                </h2>
+                <p class="text-zinc-500 text-base md:text-lg max-w-md font-medium leading-relaxed text-center md:text-left mx-auto md:mx-0">
+                    Ready to turn your idea into reality with high-performance web solutions.
+                </p>
+            </div>
+
+            <!-- 2. AVAILABILITY -->
+            <div class="md:col-span-1 lg:col-span-4 bento-card p-8 bg-zinc-900 justify-between animate-in" style="animation-delay: 0.2s;">
+                <span class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-4 block text-center md:text-left">Current Status</span>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.4)]"></div>
+                        <span class="font-bold text-xs lg:text-sm uppercase tracking-tight text-zinc-300">Available for Freelance</span>
+                    </div>
+                    <div class="flex items-center gap-3 border-t border-zinc-800 pt-4">
+                        <div class="w-2.5 h-2.5 bg-blue-500 rounded-full"></div>
+                        <span class="font-bold text-xs lg:text-sm uppercase tracking-tight text-zinc-300">Open for Collaboration</span>
+                    </div>
+                </div>
+                <div class="mt-8 p-4 bg-zinc-800/30 rounded-2xl border border-zinc-700/50 text-center md:text-left">
+                    <p class="text-[9px] text-zinc-600 font-bold uppercase mb-1">Timezone</p>
+                    <p class="text-sm font-bold tracking-tight text-zinc-200">Indonesia (GMT+7)</p>
+                </div>
+            </div>
+
+            <!-- 3. CONTACT FORM -->
+            <div class="md:col-span-2 lg:col-span-8 bento-card p-6 md:p-10 animate-in shadow-2xl" style="animation-delay: 0.3s;">
+                <span class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-8 block">Send a Message</span>
+                <form id="whatsappForm" class="space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-zinc-600 uppercase ml-1">Your Name</label>
+                            <input type="text" id="name" placeholder="Bimo" required>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-zinc-600 uppercase ml-1">Email Address</label>
+                            <input type="email" id="email" placeholder="bimo@example.com" required>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-zinc-600 uppercase ml-1">Project Category</label>
+                            <select id="category">
+                                <option>Landing Page</option>
+                                <option>Business Dashboard</option>
+                                <option>Corporate Website</option>
+                                <option>E-Commerce</option>
+                                <option>Custom Web App</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-zinc-600 uppercase ml-1">Est. Budget</label>
+                            <select id="budget">
+                                <option>IDR 1.5M - 5M</option>
+                                <option>IDR 5M - 15M</option>
+                                <option>IDR 15M+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-zinc-600 uppercase ml-1">Message</label>
+                        <textarea id="message" placeholder="Tell me more about your amazing project..." rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-black text-lg transition-all flex items-center justify-center gap-2 group">
+                        Ship Message <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- 4. SOCIAL CHANNELS -->
+            <div class="md:col-span-1 lg:col-span-4 space-y-6 animate-in" style="animation-delay: 0.4s;">
+                <div class="bento-card p-6 lg:p-8 flex flex-col gap-4 h-full">
+                    <span class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-4">Direct Channels</span>
+                    
+                    <a href="https://www.instagram.com/anaknyabapaksoleh/" target="_blank" class="flex items-center justify-between p-4 bg-zinc-900/50 rounded-2xl hover:border-pink-500 border border-transparent transition-all group">
+                        <div class="flex items-center gap-3">
+                            <i class="fab fa-instagram text-lg text-pink-500"></i>
+                            <span class="text-sm font-bold">Instagram</span>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-600 group-hover:text-white"></i>
+                    </a>
+                    
+                    <a href="https://www.tiktok.com/@anaknyabapaksoleh" target="_blank" class="flex items-center justify-between p-4 bg-zinc-900/50 rounded-2xl hover:border-white border border-transparent transition-all group">
+                        <div class="flex items-center gap-3">
+                            <i class="fab fa-tiktok text-lg text-white-500"></i>
+                            <span class="text-sm font-bold">TikTok</span>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-600 group-hover:text-white"></i>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/bimo-prasetyo-soleh-600579269/" target="_blank" class="flex items-center justify-between p-4 bg-zinc-900/50 rounded-2xl hover:border-blue-500 border border-transparent transition-all group">
+                        <div class="flex items-center gap-3">
+                            <i class="fab fa-linkedin-in text-lg text-blue-500"></i>
+                            <span class="text-sm font-bold">LinkedIn</span>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-600 group-hover:text-white"></i>
+                    </a>
+                    
+                    <a href="https://github.com/bimoprasetyosoleh" target="_blank" class="flex items-center justify-between p-4 bg-zinc-900/50 rounded-2xl hover:border-white border border-transparent transition-all group">
+                        <div class="flex items-center gap-3">
+                            <i class="fab fa-github text-lg text-white"></i>
+                            <span class="text-sm font-bold">GitHub</span>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-600 group-hover:text-white"></i>
+                    </a>
+
+                    <a href="https://wa.me/6285119560335" target="_blank" class="flex items-center justify-between p-4 bg-zinc-900/50 rounded-2xl hover:border-green-500 border border-transparent transition-all group">
+                        <div class="flex items-center gap-3">
+                            <i class="fab fa-whatsapp text-lg text-green-500"></i>
+                            <span class="text-sm font-bold">WhatsApp</span>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-600 group-hover:text-white"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 5. SERVICES RECAP -->
+            <div class="md:col-span-2 lg:col-span-12 bento-card p-8 animate-in" style="animation-delay: 0.5s;">
+                <div class="flex flex-col lg:flex-row justify-between items-center gap-6">
+                    <span class="text-zinc-600 text-[10px] font-black uppercase tracking-[0.3em]">Built with Excellence</span>
+                    <div class="flex flex-wrap justify-center gap-2 md:gap-3">
+                        <span class="px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-zinc-500 cursor-default">Modern Dashboards</span>
+                        <span class="px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-zinc-500 cursor-default">Scalable Systems</span>
+                        <span class="px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-zinc-500 cursor-default">Clean Interfaces</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Inisialisasi Ikon
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            // 2. Logika Preloader
+            const preloader = document.getElementById('preloader');
+            const progress = document.getElementById('loader-progress');
+            
+            setTimeout(() => { if(progress) progress.style.width = '100%'; }, 100);
+
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    preloader.style.visibility = 'hidden';
+                    document.body.style.overflow = 'auto';
+                    document.body.style.overflowX = 'hidden';
+                }, 1000);
+            });
+
+            // 3. Integrasi WhatsApp
+            const form = document.getElementById('whatsappForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const category = document.getElementById('category').value;
+                const budget = document.getElementById('budget').value;
+                const message = document.getElementById('message').value;
+
+                const phoneNumber = "6285150762029"; // Nomor WhatsApp Anda
+                
+                const text = `Halo Bimo!%0A%0ASaya *${name}* (${email}) ingin berkonsultasi mengenai project.%0A%0A*Kategori:* ${category}%0A*Estimasi Budget:* ${budget}%0A*Pesan:*%0A${message}`;
+
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${text}`;
+                
+                window.open(whatsappUrl, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experience | Bimo Prasetyo</title>
+
+    <link rel="icon" type="image/png" href="src/assets/logo/White.png" />
+    <link rel="apple-touch-icon" href="src/assets/logo/White.png" />
+    
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FIX LUCIDE: Ikon bundle lengkap -->
+    <script src="https://unpkg.com/lucide@0.400.0/dist/umd/lucide.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --bg: #0f0f0f;
+        --card: #171717;
+        --primary: #3b82f6;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        color: white;
+        margin: 0;
+        overflow: hidden; /* Dikunci saat loading */
+      }
+
+      /* --- PRELOADER STYLES --- */
+      #preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background-color: var(--bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+          visibility 0.8s;
+      }
+      .loader-logo {
+        width: 80px;
+        height: 80px;
+        background: var(--card);
+        border: 4px solid rgba(246, 246, 246, 0.295);
+        border-radius: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 24px;
+      }
+      .loader-logo span {
+        font-size: 32px;
+        font-weight: 900;
+        color: var(--primary);
+        letter-spacing: -2px;
+      }
+      .loader-bar-container {
+        width: 120px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+      }
+      #loader-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0%;
+        background: var(--primary);
+        transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+      }
+
+      /* --- BENTO STYLES --- */
+      .bento-card {
+        background: var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 24px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .bento-card:hover {
+        border-color: var(--primary);
+        transform: translateY(-5px);
+        background: #1c1c1c;
+      }
+
+      .glass-nav {
+        background: rgba(23, 23, 23, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        width: 90%;
+        max-width: 450px;
+      }
+      .nav-link {
+        color: #a1a1aa;
+        transition: 0.3s;
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 12px;
+      }
+      @media (min-width: 640px) {
+        .nav-link {
+          font-size: 14px;
+          padding: 8px 16px;
+        }
+      }
+      .nav-link.active {
+        color: white;
+        background: var(--primary);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-in {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body class="p-4 md:p-10 lg:p-16">
+    <!-- PRELOADER -->
+    <div id="preloader">
+      <div class="loader-logo">
+        <img
+          src="src/assets/logo/Black.png"
+          alt="Logo"
+          class="w-full h-full object-contain"
+        />
+        <div
+          class="absolute inset-0 rounded-[60px] bg-blue-500/10 animate-ping"
+        ></div>
+      </div>
+      <div class="loader-bar-container">
+        <div id="loader-progress"></div>
+      </div>
+      <p
+        class="mt-4 text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500 animate-pulse"
+      >
+        Accessing Experience
+      </p>
+    </div>
+
+    <!-- NAVIGASI RESPONSIF -->
+    <nav
+      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 glass-nav p-2 rounded-2xl flex justify-around md:justify-center md:gap-2 shadow-2xl"
+    >
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="experience.html" class="nav-link active">Exp</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <main class="max-w-7xl mx-auto mb-32">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
+        <!-- 1. EXPERIENCE TIMELINE (Adaptif) -->
+        <div
+          class="md:col-span-2 lg:col-span-8 bento-card p-6 md:p-10 animate-in"
+          style="animation-delay: 0.1s"
+        >
+          <span
+            class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-8 block"
+            >Work History</span
+          >
+          <div class="space-y-8">
+            <!-- Item 1 -->
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 lg:w-12 lg:h-12 bg-blue-600/10 rounded-xl flex items-center justify-center shrink-0"
+                >
+                  <i
+                    data-lucide="briefcase"
+                    class="text-blue-500 w-5 h-5 lg:w-6 lg:h-6"
+                  ></i>
+                </div>
+                <div>
+                  <h4 class="text-lg lg:text-xl font-bold">
+                    Frame Indonesia Group
+                  </h4>
+                  <p class="text-zinc-500 text-sm">Marketplace Specialist</p>
+                </div>
+              </div>
+              <span
+                class="inline-block px-4 py-1 bg-zinc-900 rounded-full text-[10px] font-bold text-zinc-400 border border-zinc-800 italic w-fit"
+                >Jul - okt 2025</span
+              >
+            </div>
+            <!-- Item 2 -->
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-zinc-800 pt-8"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 lg:w-12 lg:h-12 bg-zinc-800 rounded-xl flex items-center justify-center shrink-0"
+                >
+                  <i
+                    data-lucide="briefcase-business"
+                    class="text-zinc-500 w-5 h-5 lg:w-6 lg:h-6"
+                  ></i>
+                </div>
+                <div>
+                  <h4 class="text-lg lg:text-xl font-bold">
+                    Frame Indonesia Group
+                  </h4>
+                  <p class="text-zinc-500 text-sm">
+                    Digital Marketing - Intern
+                  </p>
+                </div>
+              </div>
+              <span
+                class="inline-block px-4 py-1 bg-zinc-900 rounded-full text-[10px] font-bold text-zinc-400 border border-zinc-800 italic w-fit"
+                >Apr - Jul 2025</span
+              >
+            </div>
+            <!-- Item 3 -->
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-zinc-800 pt-8"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 lg:w-12 lg:h-12 bg-zinc-800 rounded-xl flex items-center justify-center shrink-0"
+                >
+                  <i
+                    data-lucide="users"
+                    class="text-zinc-500 w-5 h-5 lg:w-6 lg:h-6"
+                  ></i>
+                </div>
+                <div>
+                  <h4 class="text-lg lg:text-xl font-bold">
+                    Makassar Mega Prima
+                  </h4>
+                  <p class="text-zinc-500 text-sm">
+                    Sosial Media Specialist - Intern
+                  </p>
+                </div>
+              </div>
+              <span
+                class="inline-block px-4 py-1 bg-zinc-900 rounded-full text-[10px] font-bold text-zinc-400 border border-zinc-800 italic w-fit"
+                >Mar - Jul 2024
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. SERVICES CARD -->
+        <div
+          class="md:col-span-1 lg:col-span-4 bento-card p-8 justify-between animate-in"
+          style="animation-delay: 0.2s"
+        >
+          <span
+            class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-6 block"
+            >Services</span
+          >
+          <div class="space-y-3">
+            <div
+              class="p-3 bg-zinc-900/50 rounded-xl border border-zinc-800 flex items-center gap-3"
+            >
+              <i data-lucide="layout" class="w-4 h-4 text-blue-500"></i
+              ><span class="text-xs lg:text-sm font-bold text-zinc-300"
+                >Landing Pages</span
+              >
+            </div>
+            <div
+              class="p-3 bg-zinc-900/50 rounded-xl border border-zinc-800 flex items-center gap-3"
+            >
+              <i data-lucide="component" class="w-4 h-4 text-blue-500"></i
+              ><span class="text-xs lg:text-sm font-bold text-zinc-300"
+                >Company Profile</span
+              >
+            </div>
+            <div
+              class="p-3 bg-zinc-900/50 rounded-xl border border-zinc-800 flex items-center gap-3"
+            >
+              <i data-lucide="gauge" class="w-4 h-4 text-blue-500"></i
+              ><span class="text-xs lg:text-sm font-bold text-zinc-300"
+                >Dashboard Systems</span
+              >
+            </div>
+            <div
+              class="p-3 bg-zinc-900/50 rounded-xl border border-zinc-800 flex items-center gap-3"
+            >
+              <i data-lucide="globe" class="w-4 h-4 text-blue-500"></i
+              ><span class="text-xs lg:text-sm font-bold text-zinc-300"
+                >Web Applications</span
+              >
+            </div>
+          </div>
+          <p
+            class="text-[9px] lg:text-[10px] text-zinc-600 mt-6 leading-tight uppercase font-bold"
+          >
+            Custom solutions for your business needs.
+          </p>
+        </div>
+
+        <!-- 3. ACHIEVEMENTS -->
+        <div
+          class="md:col-span-1 lg:col-span-4 bento-card p-8 animate-in"
+          style="animation-delay: 0.3s"
+        >
+          <span
+            class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-8 block"
+            >Achievements</span
+          >
+          <div class="grid grid-cols-1 gap-6">
+            <div class="flex items-end gap-3 group">
+              <span
+                class="text-4xl lg:text-5xl font-black text-white leading-none group-hover:text-blue-500 transition-colors"
+                >10+</span
+              >
+              <span
+                class="text-zinc-500 text-[9px] lg:text-[10px] font-bold uppercase mb-1 leading-tight"
+                >Landing Pages</span
+              >
+            </div>
+            <div
+              class="flex items-end gap-3 border-t border-zinc-800 pt-4 group"
+            >
+              <span
+                class="text-4xl lg:text-5xl font-black text-white leading-none group-hover:text-blue-500 transition-colors"
+                >5+</span
+              >
+              <span
+                class="text-zinc-500 text-[9px] lg:text-[10px] font-bold uppercase mb-1 leading-tight"
+                >Business Websites</span
+              >
+            </div>
+            <div
+              class="flex items-end gap-3 border-t border-zinc-800 pt-4 group"
+            >
+              <span
+                class="text-4xl lg:text-5xl font-black text-blue-500 leading-none group-hover:text-white transition-colors"
+                >3+</span
+              >
+              <span
+                class="text-zinc-500 text-[9px] lg:text-[10px] font-bold uppercase mb-1 leading-tight text-blue-500/70"
+                >Dashboard Systems</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. WORK PROCESS CARD -->
+        <div
+          class="md:col-span-2 lg:col-span-8 bento-card p-6 md:p-8 animate-in"
+          style="animation-delay: 0.4s"
+        >
+          <span
+            class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-8 block"
+            >Work Process</span
+          >
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div
+              class="p-3 lg:p-4 bg-zinc-900/30 rounded-2xl border border-zinc-800/50 flex flex-col items-center text-center"
+            >
+              <div
+                class="w-8 h-8 lg:w-10 lg:h-10 bg-blue-600/10 rounded-full flex items-center justify-center mb-3 text-blue-500 font-black text-sm lg:text-base"
+              >
+                1
+              </div>
+              <h5
+                class="text-[10px] lg:text-xs font-black uppercase mb-1 text-zinc-300"
+              >
+                Discovery
+              </h5>
+              <p class="text-[8px] lg:text-[10px] text-zinc-500">
+                Research & Planning
+              </p>
+            </div>
+            <div
+              class="p-3 lg:p-4 bg-zinc-900/30 rounded-2xl border border-zinc-800/50 flex flex-col items-center text-center"
+            >
+              <div
+                class="w-8 h-8 lg:w-10 lg:h-10 bg-blue-600/10 rounded-full flex items-center justify-center mb-3 text-blue-500 font-black text-sm lg:text-base"
+              >
+                2
+              </div>
+              <h5
+                class="text-[10px] lg:text-xs font-black uppercase mb-1 text-zinc-300"
+              >
+                Design
+              </h5>
+              <p class="text-[8px] lg:text-[10px] text-zinc-500">
+                UI/UX Prototyping
+              </p>
+            </div>
+            <div
+              class="p-3 lg:p-4 bg-zinc-900/30 rounded-2xl border border-zinc-800/50 flex flex-col items-center text-center"
+            >
+              <div
+                class="w-8 h-8 lg:w-10 lg:h-10 bg-blue-600/10 rounded-full flex items-center justify-center mb-3 text-blue-500 font-black text-sm lg:text-base"
+              >
+                3
+              </div>
+              <h5
+                class="text-[10px] lg:text-xs font-black uppercase mb-1 text-zinc-300"
+              >
+                Dev
+              </h5>
+              <p class="text-[8px] lg:text-[10px] text-zinc-500">
+                Clean Coding
+              </p>
+            </div>
+            <div
+              class="p-3 lg:p-4 bg-zinc-900/30 rounded-2xl border border-zinc-800/50 flex flex-col items-center text-center"
+            >
+              <div
+                class="w-8 h-8 lg:w-10 lg:h-10 bg-blue-600/10 rounded-full flex items-center justify-center mb-3 text-blue-500 font-black text-sm lg:text-base"
+              >
+                4
+              </div>
+              <h5
+                class="text-[10px] lg:text-xs font-black uppercase mb-1 text-zinc-300"
+              >
+                Launch
+              </h5>
+              <p class="text-[8px] lg:text-[10px] text-zinc-500">
+                Deployment & QA
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TECH STACK CARD -->
+        <div
+          class="md:col-span-2 lg:col-span-12 bento-card p-8 animate-in"
+          style="animation-delay: 0.5s"
+        >
+          <div
+            class="flex flex-wrap justify-center items-center gap-8 md:gap-16"
+          >
+            <i
+              class="fab fa-wordpress text-4xl md:text-4xl text-zinc-500 hover:text-blue-500 transition duration-300"
+            ></i>
+
+            <i
+              class="fab fa-laravel text-4xl md:text-4xl text-zinc-500 hover:text-red-500 transition duration-300"
+            ></i>
+
+            <i
+              class="fab fa-html5 text-4xl md:text-4xl text-zinc-500 hover:text-orange-500 transition duration-300"
+            ></i>
+
+            <i
+              class="fab fa-css3-alt text-4xl md:text-4xl text-zinc-500 hover:text-blue-400 transition duration-300"
+            ></i>
+
+            <i
+              class="fab fa-js text-4xl md:text-4xl text-zinc-500 hover:text-yellow-400 transition duration-300"
+            ></i>
+
+            <i
+              class="fab fa-python text-4xl md:text-4xl text-zinc-500 hover:text-yellow-500 transition duration-300"
+            ></i>
+
+            <i
+              class="fab fa-github text-4xl md:text-4xl text-zinc-500 hover:text-white transition duration-300"
+            ></i>
+
+            <i
+              class="fab fa-tailwind-css text-4xl md:text-4xl text-zinc-500 hover:text-white transition duration-300"
+            ></i>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // 1. Inisialisasi Ikon
+        if (typeof lucide !== "undefined") lucide.createIcons();
+
+        // 2. Logika Preloader
+        const preloader = document.getElementById("preloader");
+        const progress = document.getElementById("loader-progress");
+
+        setTimeout(() => {
+          progress.style.width = "100%";
+        }, 100);
+
+        window.addEventListener("load", () => {
+          setTimeout(() => {
+            preloader.style.opacity = "0";
+            preloader.style.visibility = "hidden";
+            document.body.style.overflow = "auto";
+            document.body.style.overflowX = "hidden";
+          }, 1000);
+        });
+      });
+    </script>
+  </body>
+</html>
